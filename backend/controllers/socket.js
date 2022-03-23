@@ -59,7 +59,6 @@ const saveChat = async (data, err) => {
                 let flag = false;
                 for(let i = 0; i < users[0].prevUsers.length; i++){
                     if(users[0].prevUsers[i].email === payload.receivedUserEmail){
-                        console.log("Mai Pohocha");
                         flag = true;
                         break;
                     }
@@ -69,7 +68,6 @@ const saveChat = async (data, err) => {
                         if(err){
                             console.log(err);
                         }else{
-                            console.log("Agar mai pohocha to mai gadha hoon");
                             User.findOneAndUpdate({email: payload.textedUserEmail},{$push: {prevUsers: newUsers[0]}}, (err) => {
                                 if(err){
                                     console.log(err);
@@ -89,7 +87,6 @@ const saveChat = async (data, err) => {
                 let flag = false;
                 for(let i = 0; i < users[0].prevUsers.length; i++){
                     if(users[0].prevUsers[i].email === payload.textedUserEmail){
-                        console.log("Mai Pohocha");
                         flag = true;
                         break;
                     }
@@ -98,8 +95,7 @@ const saveChat = async (data, err) => {
                     await User.find({email: payload.textedUserEmail}, async (err, newUsers) => {
                         if(err){
                             console.log(err);
-                        }else{
-                            console.log("Agar mai pohocha to mai gadha hoon");                            
+                        }else{                           
                             User.findOneAndUpdate({email: payload.receivedUserEmail},{$push: {prevUsers: newUsers[0]}}, async (err) => {
                                 if(err){
                                     console.log(err);
